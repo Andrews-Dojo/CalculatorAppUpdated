@@ -22,6 +22,7 @@ let val1;
 let val2;
 let count = 0;
 
+// Object containing operations
 const operations = {
     add: (a,b) => a+b,
     subtract: (a,b) => a-b,
@@ -67,7 +68,7 @@ numBtn.forEach(num => {
         })
     })
 
-// If count is more than 1 > top display should be displaying val1 (after operation was performed)
+
     
 
 
@@ -81,8 +82,6 @@ clear.addEventListener("click", () => {
     count = 0;
     // Make sure to clear other variables as well
 })
-
-const clearFn = () => botDisplay.textContent = '';
 
 
 
@@ -98,14 +97,19 @@ const performOperation = () => {
     } else if(operationClicked === 'multiply'){
        val1 = operations.multiply(val1,val2);
     }
+    val1 = val1.toFixed(2);
+}
 
+const checkFor0 = () => {
+    if (operationClicked === 'divide' && val2 === 0){
+        botDisplay.textContent = 'Cant divide by 0, IDIOT';
+    }
 }
 
 equal.addEventListener("click", () => {
     topDisplay.textContent += botDisplay.textContent + '=';
-    performOperation();
-
-    clearFn();
+    performOperation();    
     botDisplay.textContent = val1;
+    checkFor0();
     count = 0;
 })
