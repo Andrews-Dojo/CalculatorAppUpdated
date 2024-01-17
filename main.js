@@ -20,8 +20,7 @@ const divide = (a,b) => a/b;
 
 let val1;
 let val2;
-let equalClicked = false;
-
+let count = 0;
 
 const operations = {
     add: (a,b) => a+b,
@@ -31,7 +30,6 @@ const operations = {
 }
 
 let operationClicked;
-
 
 // function to update display
 const updateDisplay = (num) => {
@@ -48,14 +46,29 @@ numBtn.forEach(num => {
     // Updates display with operation clicked
     operateBtn.forEach(op => {
         op.addEventListener("click", () => {
-            val1 = parseInt(botDisplay.textContent);
-            updateDisplay(op);
-            topDisplay.textContent = botDisplay.textContent;
-            operationClicked = op.id;
-            botDisplay.textContent = '';
+            if(count<1){
+                val1 = parseInt(botDisplay.textContent);
+                updateDisplay(op);
+                operationClicked = op.id;
+                topDisplay.textContent += botDisplay.textContent;
+                botDisplay.textContent = '';
+                count++;
+            } else {
+                val2 = parseInt(botDisplay.textContent);
+                performOperation();
+                topDisplay.textContent = val1;
+                //updateDisplay(op);
+                operationClicked = op.id;
+                topDisplay.textContent += op.textContent;
+                botDisplay.textContent = '';
+            }
+            
+
         })
     })
 
+// If count is more than 1 > top display should be displaying val1 (after operation was performed)
+    
 
 
 
@@ -63,9 +76,9 @@ numBtn.forEach(num => {
 clear.addEventListener("click", () => {
     botDisplay.textContent = '';
     topDisplay.textContent = '';
-    val1 = '';
-    val2 = '';
-    equalClicked = false;
+    val1 = 0;
+    val2 = 0;
+    count = 0;
     // Make sure to clear other variables as well
 })
 
@@ -73,9 +86,8 @@ const clearFn = () => botDisplay.textContent = '';
 
 
 
-equal.addEventListener("click", () => {
+const performOperation = () => {
     val2 = parseInt(botDisplay.textContent);
-    topDisplay.textContent += botDisplay.textContent + '=';
     // Perform operation clicked
     if(operationClicked === 'add'){
         val1 = operations.add(val1,val2);
@@ -87,7 +99,13 @@ equal.addEventListener("click", () => {
        val1 = operations.multiply(val1,val2);
     }
 
+}
+
+equal.addEventListener("click", () => {
+    topDisplay.textContent += botDisplay.textContent + '=';
+    performOperation();
+
     clearFn();
     botDisplay.textContent = val1;
-    equalClicked = true;
+    count = 0;
 })
