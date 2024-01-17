@@ -97,7 +97,7 @@ const performOperation = () => {
     } else if(operationClicked === 'multiply'){
        val1 = operations.multiply(val1,val2);
     }
-    val1 = val1.toFixed(2);
+   // val1 = val1.toFixed(2);
 }
 
 const checkFor0 = () => {
