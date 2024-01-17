@@ -6,9 +6,10 @@
 
 .btn {
     width: 60px;
-    height: 35px;
+    height: 40px;
     margin: 2px;
-    margin-top: 5px;
+    margin-top: 10px;
+    border-radius: 10px;
 }
 
 .numBtn{
@@ -21,6 +22,7 @@
 
 .operateBtn {
     background-color: chocolate;
+    border-radius: 5px;
 }
 
 .operateBtn:hover {
@@ -29,14 +31,18 @@
 
 .clear {
     background-color: crimson;
+    border-radius: 5px;
+
 }
 
 .clear:hover {
-    background-color: rgb(255, 28, 73);
+    background-color: rgb(255, 68, 68);
 }
 
 .equal {
     background-color: rgb(45, 149, 10);
+    border-radius: 5px;
+
 }
 
 .equal:hover {
@@ -59,6 +65,7 @@
     display: flex;
     justify-content: end;
     align-items: end;
+    background-color: whitesmoke;
 }
 
 h1 {
